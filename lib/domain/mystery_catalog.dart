@@ -22,7 +22,7 @@ const List<int> meditationSecondOptions = <int>[0, 5, 10, 15, 20, 30, 45, 60];
 
 const double defaultPlaybackSpeed = 1;
 
-const int defaultMeditationSeconds = 15;
+const int defaultMeditationSeconds = 20;
 
 const String signOfTheCrossFileName = 'sinal_da_cruz.mp3';
 const String creedFileName = 'credo.mp3';
