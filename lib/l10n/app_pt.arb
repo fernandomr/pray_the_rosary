@@ -1,0 +1,43 @@
+{
+  "@@locale": "pt",
+  "appTitle": "Rezar o Terço",
+  "play": "Reproduzir",
+  "pause": "Pausar",
+  "next": "Seguinte",
+  "previous": "Anterior",
+  "speed": "Velocidade {speed}",
+  "@speed": {
+    "placeholders": {
+      "speed": {
+        "type": "String"
+      }
+    }
+  },
+  "meditation": "Meditação",
+  "meditationDuration": "Meditação: {seconds} s",
+  "@meditationDuration": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "finished": "Terço concluído",
+  "signOfTheCross": "Sinal da Cruz",
+  "creed": "Credo",
+  "ourFather": "Pai Nosso",
+  "hailMaryProgress": "Ave Maria {current} de {total}",
+  "@hailMaryProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "gloryBe": "Glória",
+  "hailHolyQueen": "Salve Rainha",
+  "selected": "Selecionado"
+}
