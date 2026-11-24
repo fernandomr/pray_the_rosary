@@ -15,6 +15,9 @@ class BeadProgress extends StatelessWidget {
     final String label = labelForStep(step, l10n, isCompleted: state.isCompleted);
     final String? detail = _detailFor(step, label);
     final int? activeIndex = _highlightedStepIndex(state);
+    final int firstCrossIndex = state.steps.indexWhere(
+      (RosaryStep step) => step.kind == RosaryStepKind.signOfTheCross,
+    );
     final List<_BeadGroup> groups = _beadGroups(state.steps);
     final ColorScheme colors = Theme.of(context).colorScheme;
 
@@ -46,6 +49,7 @@ class BeadProgress extends StatelessWidget {
                 _BeadDot(
                   step: entry.step,
                   isActive: entry.stepIndex == activeIndex,
+                  isCross: entry.stepIndex == firstCrossIndex,
                   activeColor: colors.primary,
                   idleColor: colors.outlineVariant,
                 ),
@@ -172,19 +176,27 @@ class _BeadDot extends StatelessWidget {
   const _BeadDot({
     required this.step,
     required this.isActive,
+    required this.isCross,
     required this.activeColor,
     required this.idleColor,
   });
 
   final RosaryStep step;
   final bool isActive;
+  final bool isCross;
   final Color activeColor;
   final Color idleColor;
 
   @override
   Widget build(BuildContext context) {
-    final double size = _sizeFor(step.kind) + (isActive ? 4 : 0);
+    final double size = (isCross ? 16 : _sizeFor(step.kind)) + (isActive ? 4 : 0);
     final Color color = isActive ? activeColor : idleColor;
+    if (isCross) {
+      return CustomPaint(
+        size: Size(size, size),
+        painter: _CrossPainter(color),
+      );
+    }
     final BoxDecoration decoration = step.kind == RosaryStepKind.mystery
         ? BoxDecoration(
             color: color,
@@ -210,4 +222,39 @@ class _BeadDot extends StatelessWidget {
         return 10;
     }
   }
+}
+
+class _CrossPainter extends CustomPainter {
+  const _CrossPainter(this.color);
+
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()..color = color;
+    final double thickness = size.shortestSide * 0.28;
+    final Radius radius = Radius.circular(thickness / 2);
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(
+          (size.width - thickness) / 2,
+          0,
+          thickness,
+          size.height,
+        ),
+        radius,
+      ),
+      paint,
+    );
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(0, size.height * 0.22, size.width, thickness),
+        radius,
+      ),
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_CrossPainter oldDelegate) => oldDelegate.color != color;
 }
