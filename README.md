@@ -72,7 +72,3 @@ Play the Glória.
 ## Finishing
 Play the Salve Rainha.
 Finish with the Sign of the Cross.
-
-
-Plan the implementation of this app.
-Ask me clarifying questions if needed.
