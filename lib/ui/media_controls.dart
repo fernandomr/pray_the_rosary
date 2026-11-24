@@ -13,7 +13,7 @@ class MediaControls extends StatelessWidget {
     super.key,
   });
 
-  static const double buttonSize = 72;
+  static const double buttonSize = 74;
 
   final bool isPlaying;
   final double speed;
